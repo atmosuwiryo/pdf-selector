@@ -2,13 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'ng-pdf-selector',
-  template: `
-    <p>
-      pdf-selector works!
-    </p>
-  `,
-  styles: [
-  ]
+  templateUrl: './pdf-selector.component.html',
 })
 export class PdfSelectorComponent {
 

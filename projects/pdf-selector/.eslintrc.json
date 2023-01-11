@@ -29,7 +29,7 @@
     },
     {
       "files": [
-        "*.html"
+        "project/**/*.html"
       ],
       "rules": {}
     }
