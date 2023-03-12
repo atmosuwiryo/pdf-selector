@@ -69,7 +69,12 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "projects/pdf-selector-example/src/favicon.ico",
-              "projects/pdf-selector-example/src/assets"
+              "projects/pdf-selector-example/src/assets",
+              {
+                "glob": "**/*",
+                "input": "node_modules/ngx-extended-pdf-viewer/assets/",
+                "output": "/assets/"
+              }
             ],
             "styles": [
               "projects/pdf-selector-example/src/styles.scss"

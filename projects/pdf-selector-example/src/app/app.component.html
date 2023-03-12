@@ -1,1 +1,15 @@
-<ng-pdf-selector></ng-pdf-selector>
+<section>
+  <ng-pdf-selector
+    (textSelectionEvent$)="textSelection($event)"
+    document="assets/sample.pdf"
+  ></ng-pdf-selector>
+</section>
+<aside>
+  <p>{{ selection?.text }}</p>
+  <p>{{ selection?.boundingBox?.x1 }}</p>
+  <p>{{ selection?.boundingBox?.x2 }}</p>
+  <p>{{ selection?.boundingBox?.y1 }}</p>
+  <p>{{ selection?.boundingBox?.y2 }}</p>
+  <p>{{ selection?.document }}</p>
+  <p>{{ selection?.pageIndex }}</p>
+</aside>

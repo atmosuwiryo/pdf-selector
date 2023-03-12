@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TextSelection } from 'pdf-selector';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'pdf-selector-example';
+  selection?: TextSelection;
+
+  textSelection(ev: TextSelection ): void{
+    this.selection = ev;
+  }
+
 }

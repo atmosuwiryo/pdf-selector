@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "peerDependencies": {
     "@angular/common": "^15.0.0",
-    "@angular/core": "^15.0.0"
+    "@angular/core": "^15.0.0",
+    "ngx-extended-pdf-viewer": "^16.2.4"
   },
   "dependencies": {
     "tslib": "^2.3.0"

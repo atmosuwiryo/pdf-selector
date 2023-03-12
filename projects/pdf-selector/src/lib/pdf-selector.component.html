@@ -1,3 +1,94 @@
-<h1>
-  <p>pdf-selector</p>
-</h1>
+<div class="document-container">
+  <ngx-extended-pdf-viewer
+    [src]="document"
+    (pageChange)="onChangePage($event)"
+    [textLayer]="true"
+    (textLayerRendered)="addSelectListener($event); loadPreselectedBbox()"
+    [handTool]="false"
+    [scrollMode]="3"
+    [spread]="'off'"
+    [(page)]="selectedPage"
+    pageViewMode="single"
+    [zoom]="'page-width'"
+    [customToolbar]="additionalSelect"
+    [customFreeFloatingBar]="infoToolbar"
+    (pageRendered)="afterPageRendered()"
+  >
+  </ngx-extended-pdf-viewer>
+
+  <ng-template #additionalSelect>
+    <div id="toolbarViewer">
+      <div id="toolbarViewerLeft" class="w-1/3">
+        <div id="selectContainer" class="flex gap-3">
+          <div class="pt-1 display-icon">
+            <i
+              class="far fa-arrow-alt-circle-left text-2xl text-light-blue hover:text-[#00C1F7] active:text-light-blue-pressed cursor-pointer"
+            ></i>
+          </div>
+
+          <select
+            class="py-2 pr-10 pl-3 mt-1 w-full text-sm rounded-sm border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            [(ngModel)]="document"
+          >
+            {{
+              document
+            }}
+          </select>
+
+          <a
+            href="{{ document }}"
+            title="{{ document }}"
+            target="_blank"
+            class="flex ml-2 text-sm cursor-pointer text-primary-blue"
+          >
+            <div class="my-auto">
+              <img
+                src="../assets/images/download-pdf.svg"
+                alt="download pdf file"
+              />
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div id="toolbarViewerRight">
+        <pdf-find-button
+          [showFindButton]="true"
+          [textLayer]="true"
+        ></pdf-find-button>
+        <pdf-paging-area></pdf-paging-area>
+      </div>
+
+      <pdf-zoom-toolbar></pdf-zoom-toolbar>
+    </div>
+
+    <!-- CUSTOM PROGRESS BAR -- needed when using version >13.5.0-alpha.0 -->
+    <!-- <div *ngIf="inProgress" class="w-full bg-gray-200 rounded-sm dark:bg-gray-700">
+      <div class="p-0.5 text-xs font-medium leading-none text-center text-blue-100 bg-blue-600 rounded-sm" style="width: {{progressPercentage}}%"> {{progressPercentage}}%</div>
+  </div> -->
+  </ng-template>
+  <ng-template #infoToolbar>
+    <div
+      *ngIf="limitedSelection"
+      class="flex absolute top-6 z-10 w-full leading-6 text-white bg-secondary-red/90 border-3 border-secondary-red"
+    >
+      <div class="flex justify-center items-center mx-auto w-12 text-lg flex-0">
+        <i class="fal fa-info-circle"></i>
+      </div>
+
+      <div class="flex-1">
+        <div>
+          <strong>Info</strong>
+        </div>
+
+        <span>{{ limitedSelectionMessage }}</span>
+      </div>
+
+      <div class="flex justify-start items-start mx-auto w-4 text-xs flex-0">
+        <button (click)="limitedSelection = false">
+          <i class="fal fa-times"></i>
+        </button>
+      </div>
+    </div>
+  </ng-template>
+</div>
