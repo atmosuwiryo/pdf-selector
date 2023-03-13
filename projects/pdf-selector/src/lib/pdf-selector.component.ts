@@ -1,6 +1,7 @@
-import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2 } from '@angular/core';
 import { TextLayerRenderedEvent } from 'ngx-extended-pdf-viewer';
+import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2 } from '@angular/core';
 import { BoundingBox, LimitedSelectionEvent, TextSelection } from './pdf-selector';
+import { PdfDocument } from './pdf-selector';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 declare const PDFViewerApplication: any;
@@ -10,8 +11,9 @@ declare const PDFViewerApplication: any;
 })
 export class PdfSelectorComponent implements OnInit, OnDestroy {
 
+    @Input() pdfDocuments!: PdfDocument[];
+    @Input() selectedDocument?: PdfDocument;
     @Input() selectedPage?: number;
-    @Input() document!: string;
     @Input() preselectedBbox?: number[];
     @Output() readonly textSelectionEvent$ = new EventEmitter<TextSelection>();
     @Output() readonly limitedSelectionEvent$ = new EventEmitter<LimitedSelectionEvent>();
@@ -34,22 +36,11 @@ export class PdfSelectorComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void {
 
-        if (!this.document) {
+        if (!this.selectedDocument) {
 
-            // no op
-            // this.selectedDocument = this.documents[ 0 ];
+          this.selectedDocument = this.pdfDocuments[0];
 
         }
-
-        // this.resultService.displayDocumentPanelEvent$.subscribe((isToDisplay: boolean) => {
-
-        //     if (isToDisplay) {
-
-        //         this.onChangePage(this.selectedDocument.pages[ 0 ].number);
-
-        //     }
-
-        // });
 
     }
 
@@ -211,7 +202,7 @@ export class PdfSelectorComponent implements OnInit, OnDestroy {
 
                 const textSelection: TextSelection = {
 
-                    document: this.document as string,
+                    document: this.selectedDocument?.url as string,
                     pageIndex: selected.page,
                     text: this.selectedText,
                     boundingBox: selected.imageBbox,
@@ -533,4 +524,3 @@ export class PdfSelectorComponent implements OnInit, OnDestroy {
 //     templateUrl: './pdf-text-selector.component.html',
 //     styleUrls: [ './pdf-text-selector.component.scss' ]
 // })
-

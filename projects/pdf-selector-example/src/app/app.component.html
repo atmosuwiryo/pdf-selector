@@ -1,15 +1,44 @@
-<section>
-  <ng-pdf-selector
-    (textSelectionEvent$)="textSelection($event)"
-    document="assets/sample.pdf"
-  ></ng-pdf-selector>
-</section>
-<aside>
-  <p>{{ selection?.text }}</p>
-  <p>{{ selection?.boundingBox?.x1 }}</p>
-  <p>{{ selection?.boundingBox?.x2 }}</p>
-  <p>{{ selection?.boundingBox?.y1 }}</p>
-  <p>{{ selection?.boundingBox?.y2 }}</p>
-  <p>{{ selection?.document }}</p>
-  <p>{{ selection?.pageIndex }}</p>
-</aside>
+<div class="block w-full h-full">
+  <section class="inline-block w-3/12 align-top pt-8 px-2 text-slate-700">
+    <label for="selected-text">Selected Text:</label>
+    <textarea
+      id="selected-text"
+      class="w-full resize-none text-xs text-slate-500"
+      rows="4"
+      readonly
+      disabled
+      wrap="off"
+    >
+      {{ selection?.text }}
+    </textarea>
+    <br />
+    <label for="doc-url">Document:</label>
+    <p id="doc-url" class="text-xs text-slate-500">{{ selection?.document }}</p>
+    <br />
+    <label for="doc-index">Page Index:</label>
+    <p id="doc-index" class="text-xs text-slate-500">
+      {{ selection?.pageIndex }}
+    </p>
+    <br />
+    <label for="bounding-box">Bounding Box:</label>
+    <textarea
+      id="bounding-box"
+      class="w-full resize-none text-xs text-slate-500"
+      rows="6"
+      readonly
+      disabled
+      wrap="off"
+    >
+      {{ selection?.boundingBox | json }}
+    </textarea>
+    <!-- <pre class="text-sm"> -->
+    <!--   {{ selection | json }} -->
+  </section>
+  <!-- </pre> -->
+  <section class="inline-block w-9/12">
+    <ng-pdf-selector
+      (textSelectionEvent$)="textSelection($event)"
+      [pdfDocuments]="pdfDocuments"
+    ></ng-pdf-selector>
+  </section>
+</div>
