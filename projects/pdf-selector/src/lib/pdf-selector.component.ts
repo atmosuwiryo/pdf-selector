@@ -508,19 +508,3 @@ export class PdfSelectorComponent implements OnInit, OnDestroy {
     // }
 
 }
-
-// import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, Renderer2 } from '@angular/core';
-// import { TextLayerRenderedEvent } from 'ngx-extended-pdf-viewer';
-
-// import { BoundingBox } from '../../../shared/interfaces/bounding-box.interface';
-// import { EntityDocumentResponse } from '../../../work/task/entity-response.model';
-// import { LimitedSelectionEvent, TextSelection } from './pdf-text-selector.interface';
-// import { ResultService } from '../../../work/task/results/result.service';
-
-// declare const PDFViewerApplication: any;
-
-// @Component({
-//     selector: 'app-pdf-text-selector',
-//     templateUrl: './pdf-text-selector.component.html',
-//     styleUrls: [ './pdf-text-selector.component.scss' ]
-// })
